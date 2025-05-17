@@ -126,7 +126,7 @@ func getNoteByID(c *gin.Context) {
 	idStr := c.Param("id")
 	c.JSON(http.StatusBadRequest, gin.H{"error": invalidNoteIDError})
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid note ID"})
+		c.JSON(http.StatusBadRequest, gin.H{"error": invalidNoteIDError})
 		return
 	}
 
@@ -155,7 +155,7 @@ func updateNote(c *gin.Context) {
 	idStr := c.Param("id")
 	id, err := uuid.Parse(idStr)
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid note ID"})
+		c.JSON(http.StatusBadRequest, gin.H{"error": invalidNoteIDError})
 		return
 	}
 
@@ -196,7 +196,7 @@ func deleteNote(c *gin.Context) {
 	idStr := c.Param("id")
 	id, err := uuid.Parse(idStr)
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid note ID"})
+		c.JSON(http.StatusBadRequest, gin.H{"error": invalidNoteIDError})
 		return
 	}
 
