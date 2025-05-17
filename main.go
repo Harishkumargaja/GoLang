@@ -23,6 +23,8 @@ type Note struct {
 var client *supabase.Client
 var validate *validator.Validate
 
+const invalidNoteIDError = "Invalid note ID"
+
 func main() {
 	supabaseURL := "https://rojqpylyzaaryefgalrp.supabase.co"
 	supabaseKey := "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJvanFweWx5emFhcnllZmdhbHJwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDIxODcwNjYsImV4cCI6MjA1Nzc2MzA2Nn0.4CbjARN73KTJVma3Yarf2CNT6FyPw2qGW9ENyv_f5Ns"
@@ -122,7 +124,7 @@ func createNote(c *gin.Context) {
 // getNoteByID handles GET requests to /notes/:id to retrieve a specific note from Supabase
 func getNoteByID(c *gin.Context) {
 	idStr := c.Param("id")
-	id, err := uuid.Parse(idStr)
+	c.JSON(http.StatusBadRequest, gin.H{"error": invalidNoteIDError})
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid note ID"})
 		return
