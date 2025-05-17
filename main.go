@@ -52,12 +52,16 @@ func main() {
 
 	router := gin.Default()
 
+	// Define route constants
+	const notes = "/notes"
+	const noteByIDRoute = "/notes/:id"
+
 	// Define routes
-	router.GET("/notes", getNotes)
-	router.POST("/notes", createNote)
-	router.GET("/notes/:id", getNoteByID)
-	router.PUT("/notes/:id", updateNote)
-	router.DELETE("/notes/:id", deleteNote)
+	router.GET(notes, getNotes)
+	router.POST(notes, createNote)
+	router.GET(noteByIDRoute, getNoteByID)
+	router.PUT(noteByIDRoute, updateNote)
+	router.DELETE(noteByIDRoute, deleteNote)
 
 	// Run the server
 	router.Run(":8080")
